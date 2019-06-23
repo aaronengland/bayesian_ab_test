@@ -1,5 +1,7 @@
 # bayesian_ab_test
 
+A Python package built on PyMC3 for AB testing using Bayesian methods.
+
 Dependencies include:
 - pymc3
 - scipy
