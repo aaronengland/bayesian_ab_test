@@ -8,6 +8,4 @@ Dependencies include:
 - pandas
 - numpy
 
-To install, use:
-
-pip install 
+To install, use: pip install git+https://github.com/aaronengland/bayesian_ab_test.git
