@@ -24,13 +24,13 @@ test = bayesian_ab_test(sample_a_total=4590,
 Return attributes:
 
 Data frame of metrics
--test.df
+- test.df
 
 Least plausible value plot
--test.lpv_plot
+- test.lpv_plot
 
 Trace from PyMC3 draws
--test.trace
+- test.trace
 
 Bayesian fraction missing information
 -test.bmfi
