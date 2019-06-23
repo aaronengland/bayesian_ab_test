@@ -1,0 +1,7 @@
+setup.py
+bayesian_ab_test/__init__.py
+bayesian_ab_test.egg-info/PKG-INFO
+bayesian_ab_test.egg-info/SOURCES.txt
+bayesian_ab_test.egg-info/dependency_links.txt
+bayesian_ab_test.egg-info/not-zip-safe
+bayesian_ab_test.egg-info/top_level.txt

@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: bayesian-ab-test
+Version: 0.1
+Summary: Package for Bayesian AB testing
+Home-page: http://github.com/aaronengland/bayesian_ab_test
+Author: Aaron England
+Author-email: aaron.england24@gmail.com
+License: MIT
+Description: UNKNOWN
+Platform: UNKNOWN
