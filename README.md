@@ -45,7 +45,7 @@ Trace from PyMC3 draws
 - test.trace
 
 Bayesian fraction missing information
-- test.bmfi
+- test.bfmi
 
 Maximum gelman-rubin statistic
 - test.max_gr
