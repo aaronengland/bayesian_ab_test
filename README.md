@@ -11,7 +11,7 @@ Dependencies include:
 - numpy
 
 Example:
-
+```
 from bayesian_ab_test import *
 
 test = bayesian_ab_test(sample_a_total=4590, 
@@ -22,7 +22,7 @@ test = bayesian_ab_test(sample_a_total=4590,
                         pct_tune=50, 
                         gr_threshold=1, 
                         N_additional_draws=1000)
-
+```
 Argument definitions:
 - sample_a_total: total opportunity for sample A to respond (i.e., total emails sent to sample A)
 - sample_a_responses: total responses for sample A (i.e., number of clicks in sample A)
