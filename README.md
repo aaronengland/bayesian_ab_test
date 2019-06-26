@@ -13,7 +13,7 @@ Dependencies include:
 Example:
 ```
 # import dependencies
-from bayesian_ab_test import *
+from bayesian_ab_test import bayesian_ab_test
 
 # run test
 test = bayesian_ab_test(sample_a_total=4590, 
