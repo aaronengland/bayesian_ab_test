@@ -12,8 +12,10 @@ Dependencies include:
 
 Example:
 ```
+# import dependencies
 from bayesian_ab_test import *
 
+# run test
 test = bayesian_ab_test(sample_a_total=4590, 
                         sample_a_responses=1360, 
                         sample_b_total=3975, 
@@ -34,47 +36,44 @@ Argument definitions:
 - N_additional_draws: number of draws to add to N_simulations is Gelman-Rubin threshold is not met (default = 1000)
 
 Attributes that can be returned:
+```
+# Data frame of metrics
+test.df
 
-Data frame of metrics
-- test.df
+# Least plausible value plot
+test.lpv_plot
 
-Least plausible value plot
-- test.lpv_plot
+# Bayesian fraction missing information
+test.bfmi
 
-Trace from PyMC3 draws
-- test.trace
+# Maximum gelman-rubin statistic
+test.max_gr
 
-Bayesian fraction missing information
-- test.bfmi
+# Plot of distributions
+test.dist_plot
 
-Maximum gelman-rubin statistic
-- test.max_gr
+# Proportion of sample A greater than B
+test.proportion_A_greater_than_B
 
-Plot of distributions
-- test.dist_plot
+# Proportion of sample B greater than A
+test.proportion_B_greater_than_A
 
-Proportion of sample A greater than B
-- test.proportion_A_greater_than_B
+# t value from hypothesis test
+test.t_test_t
 
-Proportion of sample B greater than A
-- test.proportion_B_greater_than_A
+# p value from hypothesis test
+test.t_test_sig
 
-t value from hypothesis test
-- test.t_test_t
+# Cohens d effect size
+test.cohens_d
 
-p value from hypothesis test
-- test.t_test_sig
+# Interpretation of effect size
+test.size_of_effect
 
-Cohens d effect size
-- test.cohens_d
+# Conclusion from t test in APA format
+test.t_test_conclusion
 
-Interpretation of effect size
-- test.size_of_effect
-
-Conclusion from t test in APA format
-- test.t_test_conclusion
-
-Bar plot comparing means
-- test.bar_plot
-
+# Bar plot comparing means
+test.bar_plot
+```
 To install, use: pip install git+https://github.com/aaronengland/bayesian_ab_test.git
