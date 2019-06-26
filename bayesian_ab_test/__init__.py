@@ -166,7 +166,7 @@ def bayesian_ab_test(sample_a_total, sample_a_responses, sample_b_total, sample_
     sns.set(style='white', palette='muted', color_codes=True)
     # Set up the matplotlib figure
     dist_plot, axes = plt.subplots(figsize=(7, 7), sharex=True)
-    dist_plot.suptitle('Posterior distributions of $p_A$ (blue) and $p_B$ (red) after {} simulations'.format(N_simulations))
+    dist_plot.suptitle('Posterior distributions of $p_A$ (blue) and $p_B$ (red) after {} draws'.format(N_simulations))
     sns.despine(left=True)
     # posterior A
     p1 = sns.distplot(p_A_samples, color='b', label='Posterior of $p_A$')
