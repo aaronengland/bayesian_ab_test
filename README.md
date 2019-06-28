@@ -31,9 +31,9 @@ Argument definitions:
 - ```sample_b_total```: total opportunity for sample B to respond (i.e., total emails sent to sample B)
 - ```sample_b_responses```: total responses for sample B (i.e., number of clicks in sample B)
 - ```N_simulations```: number of tuned samples to draws (see https://docs.pymc.io/api/inference.html; default = 1000)
-- ```pct_tune```: percentage of N_simulations to use for tuning (note: this number is added back to N_simulations; default = 50)
+- ```pct_tune```: percentage of ```N_simulations``` to use for tuning (note: this number is added back to N_simulations; default = 50)
 - ```gr_threshold```: threshold to use for Gelman-Rubin statistic to determine if additional draws are necessary (default = 1)
-- ```N_additional_draws```: number of draws to add to N_simulations is Gelman-Rubin threshold is not met (default = 1000)
+- ```N_additional_draws```: number of draws to add to ```N_simulations``` is Gelman-Rubin threshold is not met (default = 1000)
 
 Attributes that can be returned:
 ```
@@ -76,6 +76,6 @@ test.t_test_conclusion
 # Bar plot comparing means
 test.bar_plot
 ```
-To install, use: pip install git+https://github.com/aaronengland/bayesian_ab_test.git
+To install, use: ```pip install git+https://github.com/aaronengland/bayesian_ab_test.git```
 
 Source: http://camdavidsonpilon.github.io/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/
