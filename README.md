@@ -1,6 +1,6 @@
 # bayesian_ab_test
 
-A Python package built on PyMC3 (https://docs.pymc.io/) for AB testing using Bayesian methods. Priors are assumed to be uniform and posteriors are assumed to be Bernoulli.
+A Python package built on [PyMC3](https://docs.pymc.io/) for AB testing using Bayesian methods. Priors are assumed to be uniform and posteriors are assumed to be Bernoulli.
 
 Dependencies include:
 - pymc3
