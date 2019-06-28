@@ -88,7 +88,7 @@ Where:
 # Interpretation of effect size
 test.size_of_effect
 ```
-(https://www.polyu.edu.hk/mm/effectsizefaqs/formula/t1.jpg)
+![alt text](https://www.polyu.edu.hk/mm/effectsizefaqs/formula/t1.jpg)
 ```
 # Conclusion from t test in APA format
 test.t_test_conclusion
