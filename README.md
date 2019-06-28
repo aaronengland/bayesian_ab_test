@@ -40,7 +40,7 @@ Attributes that can be returned:
 # Data frame of metrics
 test.df
 
-# Least plausible value plot
+# Lower plausible value plot
 test.lpv_plot
 ```
 <img src="https://latex.codecogs.com/gif.latex?LowerPlausibleValue&space;=&space;\frac{a}{a&plus;b}&space;-&space;1.65\sqrt{\frac{ab}{(a&plus;b)^{2}(a&plus;b&plus;1)}}" title="LowerPlausibleValue = \frac{a}{a+b} - 1.65\sqrt{\frac{ab}{(a+b)^{2}(a+b+1)}}" /></a>
