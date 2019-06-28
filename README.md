@@ -77,7 +77,14 @@ test.t_test_sig
 
 # Cohens d effect size
 test.cohens_d
+```
+<img src="https://latex.codecogs.com/gif.latex?d&space;=&space;\frac{M_{1}-M_{2}}{SD_{pooled}}" title="d = \frac{M_{1}-M_{2}}{SD_{pooled}}" /></a>
 
+Where:
+
+<img src="https://latex.codecogs.com/gif.latex?SD_{pooled}&space;=&space;\sqrt{\frac{SD_{1}^{2}&plus;SD_{2}^{2}}{2}}" title="SD_{pooled} = \sqrt{\frac{SD_{1}^{2}+SD_{2}^{2}}{2}}" /></a>
+
+```
 # Interpretation of effect size
 test.size_of_effect
 
