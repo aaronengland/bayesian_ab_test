@@ -96,4 +96,4 @@ test.bar_plot
 ```
 To install, use: ```pip install git+https://github.com/aaronengland/bayesian_ab_test.git```
 
-Source: http://camdavidsonpilon.github.io/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/
+Source: [Probabilistic Programming & Bayesian Methods for Hackers](http://camdavidsonpilon.github.io/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/)
