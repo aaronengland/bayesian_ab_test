@@ -42,7 +42,16 @@ test.df
 
 # Least plausible value plot
 test.lpv_plot
+```
+<img src="https://latex.codecogs.com/gif.latex?LowerPlausibleValue&space;=&space;\frac{a}{a&plus;b}&space;-&space;1.65\sqrt{\frac{ab}{(a&plus;b)^{2}(a&plus;b&plus;1)}}" title="LowerPlausibleValue = \frac{a}{a+b} - 1.65\sqrt{\frac{ab}{(a+b)^{2}(a+b+1)}}" /></a>
 
+Where:
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=a&space;=&space;1&space;&plus;&space;N_{clicks}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?a&space;=&space;1&space;&plus;&space;N_{clicks}" title="a = 1 + N_{clicks}" /></a>
+
+<img src="https://latex.codecogs.com/gif.latex?b&space;=&space;1&space;&plus;&space;N_{nonclicks}" title="b = 1 + N_{nonclicks}" /></a>
+
+```
 # Bayesian fraction missing information
 test.bfmi
 
