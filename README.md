@@ -43,6 +43,8 @@ test.df
 # Lower plausible value plot
 test.lpv_plot
 ```
+<a href="https://www.codecogs.com/eqnedit.php?latex=UpperPlausibleValue&space;=&space;\frac{a}{a&plus;b}&plus;1.65\sqrt{\frac{ab}{(a&plus;b)^{2}(a&plus;b&plus;1)}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?UpperPlausibleValue&space;=&space;\frac{a}{a&plus;b}&plus;1.65\sqrt{\frac{ab}{(a&plus;b)^{2}(a&plus;b&plus;1)}}" title="UpperPlausibleValue = \frac{a}{a+b}+1.65\sqrt{\frac{ab}{(a+b)^{2}(a+b+1)}}" /></a>
+
 <img src="https://latex.codecogs.com/gif.latex?LowerPlausibleValue&space;=&space;\frac{a}{a&plus;b}&space;-&space;1.65\sqrt{\frac{ab}{(a&plus;b)^{2}(a&plus;b&plus;1)}}" title="LowerPlausibleValue = \frac{a}{a+b} - 1.65\sqrt{\frac{ab}{(a+b)^{2}(a+b+1)}}" /></a>
 
 Where:
