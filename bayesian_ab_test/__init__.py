@@ -242,10 +242,11 @@ def bayesian_ab_test(sample_a_total, sample_a_responses, sample_b_total, sample_
     ###########################################################################
     # put all of the objects we want inside of a class so they can be returned
     class Attributes:
-        def __init__(self, df, lpv_plot, trace, bfmi, max_gr, dist_plot, proportion_A_greater_than_B, proportion_B_greater_than_A, t_test_t, t_test_sig, cohens_d, size_of_effect, t_test_conclusion, bar_plot):
+        def __init__(self, df, lpv_plot, p_A_samples, p_B_samples, bfmi, max_gr, dist_plot, proportion_A_greater_than_B, proportion_B_greater_than_A, t_test_t, t_test_sig, cohens_d, size_of_effect, t_test_conclusion, bar_plot):
             self.df = df
             self.lpv_plot = lpv_plot
-            self.trace = trace
+            self.p_A_samples = p_A_samples
+            self.p_B_samples = p_B_samples
             self.bfmi = bfmi
             self.max_gr = max_gr
             self.dist_plot = dist_plot
@@ -257,6 +258,6 @@ def bayesian_ab_test(sample_a_total, sample_a_responses, sample_b_total, sample_
             self.size_of_effect = size_of_effect
             self.t_test_conclusion = t_test_conclusion
             self.bar_plot = bar_plot
-    x = Attributes(df, lpv_plot, trace, bfmi, max_gr, dist_plot, proportion_A_greater_than_B, proportion_B_greater_than_A, t_test_t, t_test_sig, cohens_d, size_of_effect, t_test_conclusion, bar_plot)
+    x = Attributes(df, lpv_plot, p_A_samples, p_B_samples, bfmi, max_gr, dist_plot, proportion_A_greater_than_B, proportion_B_greater_than_A, t_test_t, t_test_sig, cohens_d, size_of_effect, t_test_conclusion, bar_plot)
     return x
 
