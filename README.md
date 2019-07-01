@@ -54,6 +54,12 @@ Where:
 <img src="https://latex.codecogs.com/gif.latex?b&space;=&space;1&space;&plus;&space;N_{nonclicks}" title="b = 1 + N_{nonclicks}" /></a>
 
 ```
+# Distribution of sample A posterior
+test.p_A_samples
+
+# Distribution of sample B posterior
+test.p_B_samples
+
 # Bayesian fraction missing information
 test.bfmi
 
