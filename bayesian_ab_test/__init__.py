@@ -211,6 +211,77 @@ def bayesian_ab_test_prob(sample_a_total, sample_a_responses, sample_b_total, sa
 ###############################################################################
 ###############################################################################
 
+# define function for bayesian t test
+def bayesian_t_test(sample_A, sample_B, v_minus_1=100, N_simulations=1000, pct_tune=50):  
+    # make pct_tune into a proportion
+    prop_tune = pct_tune/100
+    # calculate number to tune
+    N_tune = round(N_simulations*prop_tune)
+    
+    # save arrays
+    y1 = np.array(sample_A)
+    y2 = np.array(sample_B)
+    # put in df
+    y = pd.DataFrame(dict(value=np.r_[y1, y2], group=np.r_[['Sample A']*len(y1), ['Sample B']*len(y2)]))
+        
+    # get numbers to help set priors
+    μ_m = y.value.mean() # get mean of y['value']
+    μ_s = y.value.std() * 2 # get 2 x sd of y['value']
+    σ_low = 0 
+    σ_high = 1
+    
+    # instantiate model
+    with pm.Model() as model:
+        # means
+        group1_mean = pm.Normal('group1_mean', mu=μ_m, sd=μ_s)
+        group2_mean = pm.Normal('group2_mean', mu=μ_m, sd=μ_s)
+        # standard deviations
+        group1_std = pm.Uniform('group1_std', lower=σ_low, upper=σ_high)
+        group2_std = pm.Uniform('group2_std', lower=σ_low, upper=σ_high)
+        # degrees of freedom paramter
+        ν = pm.Exponential('ν_minus_one', 1/(v_minus_1-1)) + 1
+        # transform standard deviations into lambdas for likelihood functions
+        λ1 = group1_std**-2
+        λ2 = group2_std**-2
+        # likelohood functions y ~ T(v, mu, lam)
+        group1 = pm.StudentT('control', nu=ν, mu=group1_mean, lam=λ1, observed=y1)
+        group2 = pm.StudentT('treatment', nu=ν, mu=group2_mean, lam=λ2, observed=y2)
+        # calculate differences
+        diff_of_means = pm.Deterministic('difference of means', group2_mean - group1_mean)
+        diff_of_stds = pm.Deterministic('difference of stds', group2_std - group1_std)
+        effect_size = pm.Deterministic('effect size', diff_of_means / np.sqrt((group1_std**2 + group2_std**2) / 2))
+    
+    # fit model
+    with model:
+        trace = pm.sample(draws=N_simulations+N_tune, tune=N_tune)
+        
+    # plot posteriors
+    print('Posteriors plots')
+    pm.plot_posterior(trace, var_names=['group1_mean','group2_mean', 'group1_std', 'group2_std', 'ν_minus_one'],
+                      color='#87ceeb');
+    
+    # plot differences (means, stds, and effect size)
+    print('Differences plots')
+    pm.plot_posterior(trace, var_names=['difference of means','difference of stds', 'effect size'],
+                      ref_val=0,
+                      color='#87ceeb');
+    
+    # forest plot
+    print('Forest plot')
+    pm.forestplot(trace, var_names=['group1_std','group2_std','ν_minus_one']);
+    
+    # table summary
+    summary = pm.summary(trace, varnames=['difference of means', 'difference of stds', 'effect size'])
+    
+    class Attributes:
+        def __init__(self, summary):
+            self.summary = summary
+    x = Attributes(summary)
+    return x
+
+###############################################################################
+###############################################################################
+
 # define function for parametric ttest
 def parametric_t_test(sample_A, sample_B, name_of_metric):
     p_A_samples = sample_A
