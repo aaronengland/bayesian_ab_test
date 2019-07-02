@@ -10,10 +10,12 @@ Dependencies include:
 - pandas
 - numpy
 
+# bayesian_ab_test_prob
+
 Example:
 ```
 # import dependencies
-from bayesian_ab_test import bayesian_ab_test
+from bayesian_ab_test import bayesian_ab_test_prob
 
 # run test
 test = bayesian_ab_test_prob(sample_a_total=4590, 
@@ -75,12 +77,13 @@ test.proportion_A_greater_than_B
 # Proportion of sample B greater than A
 test.proportion_B_greater_than_A
 ```
-# 
+
+# parametric_t_test
 
 Example:
 ```
 # import dependencies
-from bayesian_ab_test import bayesian_ab_test
+from bayesian_ab_test import parametric_t_test
 
 # run test
 t_test = parametric_t_test(sample_A=test.p_A_samples, 
