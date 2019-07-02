@@ -82,11 +82,11 @@ test.proportion_B_greater_than_A
 
 Example:
 ```
-bayesian_t_test = bayesian_t_test(sample_A=test.p_A_samples, 
-                                  sample_B=test.p_A_samples, 
-                                  v_minus_1=100,
-                                  N_simulations=1000,
-                                  pct_tune=50)
+bayesian_ttest = bayesian_t_test(sample_A=test.p_A_samples, 
+                                 sample_B=test.p_A_samples, 
+                                 v_minus_1=100,
+                                 N_simulations=1000,
+                                 pct_tune=50)
 ```
 Argument definitions:
 - ```sample_A```: array of values for sample A
