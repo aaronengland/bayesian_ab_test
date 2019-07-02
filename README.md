@@ -10,7 +10,7 @@ Dependencies include:
 - pandas
 - numpy
 
-# bayesian_ab_test_prob
+## bayesian_ab_test_prob
 
 Example:
 ```
@@ -78,7 +78,27 @@ test.proportion_A_greater_than_B
 test.proportion_B_greater_than_A
 ```
 
-# parametric_t_test
+## bayesian_t_test
+
+Example:
+```
+bayesian_t_test = bayesian_t_test(sample_A=test.p_A_samples, 
+                                  sample_B=test.p_A_samples, 
+                                  v_minus_1=100,
+                                  N_simulations=1000,
+                                  pct_tune=50)
+```
+Argument definitions:
+- ```sample_A```: array of values for sample A
+- ```sample_B```: array of values for sample B
+- ```v_minus_1```: degrees of freedom paramter
+- ```N_simulations```: number of tuned samples to draws (see [PyMC3 documentation](https://docs.pymc.io/api/inference.html); default = 1000)
+- ```pct_tune```: percentage of ```N_simulations``` to use for tuning (note: this number is added back to N_simulations; default = 50)
+
+Attributes that can be returned:
+- ```bayesian_t_test.summary```: summary from analysis
+
+## parametric_t_test
 
 Example:
 ```
@@ -96,7 +116,6 @@ Argument definitions:
 - ```name_of_metric```: name of the metric for comparison (used for plotting)
 
 Attributes that can be returned:
-
 ```
 # t value from t-test
 t_test.t_test_t
@@ -125,11 +144,6 @@ t_test.t_test_conclusion
 # Bar plot comparing means
 t_test.bar_plot
 ```
-
-
-
-
-
 
 To install, use: ```pip install git+https://github.com/aaronengland/bayesian_ab_test.git```
 
