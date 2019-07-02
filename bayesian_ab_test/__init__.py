@@ -256,18 +256,15 @@ def bayesian_t_test(sample_A, sample_B, v_minus_1=100, N_simulations=1000, pct_t
         trace = pm.sample(draws=N_simulations+N_tune, tune=N_tune)
         
     # plot posteriors
-    print('Posteriors plots')
     pm.plot_posterior(trace, var_names=['group1_mean','group2_mean', 'group1_std', 'group2_std', 'ν_minus_one'],
                       color='#87ceeb');
     
     # plot differences (means, stds, and effect size)
-    print('Differences plots')
     pm.plot_posterior(trace, var_names=['difference of means','difference of stds', 'effect size'],
                       ref_val=0,
                       color='#87ceeb');
     
     # forest plot
-    print('Forest plot')
     pm.forestplot(trace, var_names=['group1_std','group2_std','ν_minus_one']);
     
     # table summary
