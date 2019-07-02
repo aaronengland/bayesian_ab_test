@@ -16,14 +16,14 @@ Example:
 from bayesian_ab_test import bayesian_ab_test
 
 # run test
-test = bayesian_ab_test(sample_a_total=4590, 
-                        sample_a_responses=1360, 
-                        sample_b_total=3975, 
-                        sample_b_responses=1215,
-                        N_simulations=1000, 
-                        pct_tune=50, 
-                        gr_threshold=1, 
-                        N_additional_draws=1000)
+test = bayesian_ab_test_prob(sample_a_total=4590, 
+                             sample_a_responses=1360, 
+                             sample_b_total=3975, 
+                             sample_b_responses=1215,
+                             N_simulations=1000, 
+                             pct_tune=50, 
+                             gr_threshold=1, 
+                             N_additional_draws=1000)
 ```
 Argument definitions:
 - ```sample_a_total```: total opportunity for sample A to respond (i.e., total emails sent to sample A)
@@ -74,15 +74,35 @@ test.proportion_A_greater_than_B
 
 # Proportion of sample B greater than A
 test.proportion_B_greater_than_A
+```
+# 
 
-# t value from hypothesis test
-test.t_test_t
+Example:
+```
+# import dependencies
+from bayesian_ab_test import bayesian_ab_test
 
-# p value from hypothesis test
-test.t_test_sig
+# run test
+t_test = parametric_t_test(sample_A=test.p_A_samples, 
+                           sample_b=test.p_B_samples,
+                           name_of_metric='Click-through rate')
+```
+Argument definitions:
+- ```sample_A```: array of values for sample A
+- ```sample_B```: array of values for sample B
+- ```name_of_metric```: name of the metric for comparison (used for plotting)
+
+Attributes that can be returned:
+
+```
+# t value from t-test
+t_test.t_test_t
+
+# p value from t-test
+t_test.t_test_sig
 
 # Cohens d effect size
-test.cohens_d
+t_test.cohens_d
 ```
 <img src="https://latex.codecogs.com/gif.latex?d&space;=&space;\frac{M_{1}-M_{2}}{SD_{pooled}}" title="d = \frac{M_{1}-M_{2}}{SD_{pooled}}" /></a>
 
@@ -92,16 +112,22 @@ Where:
 
 ```
 # Interpretation of effect size
-test.size_of_effect
+t_test.size_of_effect
 ```
 ![alt text](https://www.polyu.edu.hk/mm/effectsizefaqs/formula/t1.jpg)
 ```
 # Conclusion from t test in APA format
-test.t_test_conclusion
+t_test.t_test_conclusion
 
 # Bar plot comparing means
-test.bar_plot
+t_test.bar_plot
 ```
+
+
+
+
+
+
 To install, use: ```pip install git+https://github.com/aaronengland/bayesian_ab_test.git```
 
 Source: [Probabilistic Programming & Bayesian Methods for Hackers](http://camdavidsonpilon.github.io/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/)
