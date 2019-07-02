@@ -1,4 +1,4 @@
-# bayesian ab test
+# ab testing library
 
 # import dependencies
 import pymc3 as pm
@@ -10,7 +10,7 @@ from scipy.stats import ttest_ind
 import numpy as np
 
 # define function
-def bayesian_ab_test(sample_a_total, sample_a_responses, sample_b_total, sample_b_responses, N_simulations=1000, pct_tune=50, gr_threshold=1, N_additional_draws=1000):
+def bayesian_ab_test_prob(sample_a_total, sample_a_responses, sample_b_total, sample_b_responses, N_simulations=1000, pct_tune=50, gr_threshold=1, N_additional_draws=1000):
     ###########################################################################
     # get parameters for model
     # make pct_tune into a proportion
@@ -59,7 +59,7 @@ def bayesian_ab_test(sample_a_total, sample_a_responses, sample_b_total, sample_
     sample_B_upv = plausible_values(total=sample_b_total, upvotes=sample_b_responses)[1]
 
     # put into df
-    df = pd.DataFrame({'Variable': ['Sent','Clicked','Non-Clicked','CTR','LPV','UPV'],
+    df = pd.DataFrame({'Variable': ['Sent','Yes','No','Rate','LPV','UPV'],
                        'Sample A': [sample_a_total, sample_a_responses, N_nonclicks_A, observed_p_A, sample_A_lpv, sample_A_upv],
                        'Sample B': [sample_b_total, sample_b_responses, N_nonclicks_B, observed_p_B, sample_B_lpv, sample_B_upv]})
     # create a col that is sample A minus sample B
@@ -191,9 +191,31 @@ def bayesian_ab_test(sample_a_total, sample_a_responses, sample_b_total, sample_
     proportion_A_greater_than_B = sum_of_A_greater_than_B/len(p_A_samples)
     # calculate proportion B greater than A
     proportion_B_greater_than_A = 1-proportion_A_greater_than_B
-
+  
     ###########################################################################
-    # hypothesis testing
+    # put all of the objects we want inside of a class so they can be returned
+    class Attributes:
+        def __init__(self, df, lpv_plot, p_A_samples, p_B_samples, bfmi, max_gr, dist_plot, proportion_A_greater_than_B, proportion_B_greater_than_A):
+            self.df = df
+            self.lpv_plot = lpv_plot
+            self.p_A_samples = p_A_samples
+            self.p_B_samples = p_B_samples
+            self.bfmi = bfmi
+            self.max_gr = max_gr
+            self.dist_plot = dist_plot
+            self.proportion_A_greater_than_B = proportion_A_greater_than_B
+            self.proportion_B_greater_than_A = proportion_B_greater_than_A
+    x = Attributes(df, lpv_plot, p_A_samples, p_B_samples, bfmi, max_gr, dist_plot, proportion_A_greater_than_B, proportion_B_greater_than_A)
+    return x
+
+###############################################################################
+###############################################################################
+
+# define function for parametric ttest
+def parametric_t_test(sample_A, sample_B, name_of_metric):
+    p_A_samples = sample_A
+    p_B_samples = sample_B
+    
     # independent t-test
     t_test_t = ttest_ind(p_A_samples, p_B_samples)[0]
     t_test_sig = ttest_ind(p_A_samples, p_B_samples)[1]
@@ -214,50 +236,43 @@ def bayesian_ab_test(sample_a_total, sample_a_responses, sample_b_total, sample_
     
     # print message
     if t_test_sig < .05:
-        t_test_conclusion = 'After {0} draws, there was a significant difference between sample A (mean = {1:0.3f}) and sample B (mean = {2:0.3f}) and the effect size was {3}, diff = {4:0.3f}, t = {5:0.3f}, p = {6:0.3f}, d = {7:0.3f})'.format(N_simulations,
-                                                      np.mean(p_A_samples),
-                                                      np.mean(p_B_samples),
-                                                      size_of_effect,
-                                                      abs(np.mean(p_A_samples) - np.mean(p_B_samples)),
-                                                      t_test_t,
-                                                      t_test_sig,
-                                                      cohens_d)
+        t_test_conclusion = 'There was a significant difference between sample A (mean = {0:0.3f}) and sample B (mean = {1:0.3f}) and the effect size was {2}, diff = {3:0.3f}, t = {4:0.3f}, p = {5:0.3f}, d = {6:0.3f})'.format(np.mean(p_A_samples),
+                                                                                                                                                                                                                                  np.mean(p_B_samples),
+                                                                                                                                                                                                                                  size_of_effect,
+                                                                                                                                                                                                                                  abs(np.mean(p_A_samples) - np.mean(p_B_samples)),
+                                                                                                                                                                                                                                  t_test_t,
+                                                                                                                                                                                                                                  t_test_sig,
+                                                                                                                                                                                                                                  cohens_d)
     else:
-        t_test_conclusion = 'After {0} draws, there was not a significant difference between sample A (mean = {1:0.3f}) and sample B (mean = {2:0.3f}) and the effect size was {3}, diff = {4:0.3f}, t = {5:0.3f}, p = {6:0.3f}, d = {7:0.3f})'.format(N_simulations,
-                                                     np.mean(p_A_samples),
-                                                     np.mean(p_B_samples),
-                                                     size_of_effect,
-                                                     abs(np.mean(p_A_samples) - np.mean(p_B_samples)),
-                                                     t_test_t,
-                                                     t_test_sig,
-                                                     cohens_d)
+        t_test_conclusion = 'There was not a significant difference between sample A (mean = {0:0.3f}) and sample B (mean = {1:0.3f}) and the effect size was {2}, diff = {3:0.3f}, t = {4:0.3f}, p = {5:0.3f}, d = {6:0.3f})'.format(np.mean(p_A_samples),
+                                                                                                                                                                                                                                      np.mean(p_B_samples),
+                                                                                                                                                                                                                                      size_of_effect,
+                                                                                                                                                                                                                                      abs(np.mean(p_A_samples) - np.mean(p_B_samples)),
+                                                                                                                                                                                                                                      t_test_t,
+                                                                                                                                                                                                                                      t_test_sig,
+                                                                                                                                                                                                                                      cohens_d)
     
     ###########################################################################
     # create bar plot
     bar_plot, axes = plt.subplots()
     axes.bar(['Sample A', 'Sample B'], [np.mean(p_A_samples), np.mean(p_B_samples)], yerr=[np.std(p_A_samples), np.std(p_B_samples)], alpha=.5, capsize=10, color=('b','r'))
-    axes.set_title('Mean click probability by sample after {} draws'.format(N_simulations))
-    axes.set_ylabel('Probability of click')
+    axes.set_title('Mean {} by sample'.format(name_of_metric))
+    axes.set_ylabel('{}'.format(name_of_metric))
     
     ###########################################################################
+    
     # put all of the objects we want inside of a class so they can be returned
     class Attributes:
-        def __init__(self, df, lpv_plot, p_A_samples, p_B_samples, bfmi, max_gr, dist_plot, proportion_A_greater_than_B, proportion_B_greater_than_A, t_test_t, t_test_sig, cohens_d, size_of_effect, t_test_conclusion, bar_plot):
-            self.df = df
-            self.lpv_plot = lpv_plot
-            self.p_A_samples = p_A_samples
-            self.p_B_samples = p_B_samples
-            self.bfmi = bfmi
-            self.max_gr = max_gr
-            self.dist_plot = dist_plot
-            self.proportion_A_greater_than_B = proportion_A_greater_than_B
-            self.proportion_B_greater_than_A = proportion_B_greater_than_A
+        def __init__(self, t_test_t, t_test_sig, cohens_d, size_of_effect, t_test_conclusion, bar_plot):
             self.t_test_t = t_test_t
             self.t_test_sig = t_test_sig
             self.cohens_d = cohens_d
             self.size_of_effect = size_of_effect
             self.t_test_conclusion = t_test_conclusion
             self.bar_plot = bar_plot
-    x = Attributes(df, lpv_plot, p_A_samples, p_B_samples, bfmi, max_gr, dist_plot, proportion_A_greater_than_B, proportion_B_greater_than_A, t_test_t, t_test_sig, cohens_d, size_of_effect, t_test_conclusion, bar_plot)
+    x = Attributes(t_test_t, t_test_sig, cohens_d, size_of_effect, t_test_conclusion, bar_plot)
     return x
+
+###############################################################################
+###############################################################################
 
