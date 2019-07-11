@@ -113,44 +113,13 @@ Argument definitions:
 
 Attributes that can be returned:
 ```
-# Data frame of metrics
-test.df
-
-# Lower plausible value plot
-test.lpv_plot
-```
-<a href="https://www.codecogs.com/eqnedit.php?latex=UpperPlausibleValue&space;=&space;\frac{a}{a&plus;b}&plus;1.65\sqrt{\frac{ab}{(a&plus;b)^{2}(a&plus;b&plus;1)}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?UpperPlausibleValue&space;=&space;\frac{a}{a&plus;b}&plus;1.65\sqrt{\frac{ab}{(a&plus;b)^{2}(a&plus;b&plus;1)}}" title="UpperPlausibleValue = \frac{a}{a+b}+1.65\sqrt{\frac{ab}{(a+b)^{2}(a+b+1)}}" /></a>
-
-<img src="https://latex.codecogs.com/gif.latex?LowerPlausibleValue&space;=&space;\frac{a}{a&plus;b}&space;-&space;1.65\sqrt{\frac{ab}{(a&plus;b)^{2}(a&plus;b&plus;1)}}" title="LowerPlausibleValue = \frac{a}{a+b} - 1.65\sqrt{\frac{ab}{(a+b)^{2}(a+b+1)}}" /></a>
-
-Where:
-
-<a href="https://www.codecogs.com/eqnedit.php?latex=a&space;=&space;1&space;&plus;&space;N_{clicks}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?a&space;=&space;1&space;&plus;&space;N_{clicks}" title="a = 1 + N_{clicks}" /></a>
-
-<img src="https://latex.codecogs.com/gif.latex?b&space;=&space;1&space;&plus;&space;N_{nonclicks}" title="b = 1 + N_{nonclicks}" /></a>
-
-```
 # Distribution of sample A posterior
 test.p_A_samples
 
 # Distribution of sample B posterior
 test.p_B_samples
-
-# Bayesian fraction missing information
-test.bfmi
-
-# Maximum gelman-rubin statistic
-test.max_gr
-
-# Plot of distributions
-test.dist_plot
-
-# Proportion of sample A greater than B
-test.proportion_A_greater_than_B
-
-# Proportion of sample B greater than A
-test.proportion_B_greater_than_A
 ```
+The rest are the same as from ```bayesian_ab_test_count```
 
 ## bayesian_t_test
 
