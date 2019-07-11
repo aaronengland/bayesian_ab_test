@@ -12,7 +12,7 @@ Dependencies include:
 
 ## bayesian_ab_test_count
 
-### Example:
+#### Example:
 ```
 # import dependencies
 from bayesian_ab_test import bayesian_ab_test_count
@@ -29,7 +29,7 @@ test = bayesian_ab_test_prob(sample_A_n=100,
                              lpv_height=15,
                              n_x_observed=2)
 ```
-### Argument definitions:
+#### Argument definitions:
 - ```sample_A_n```: sample size for sample A
 - ```sample_A_count```: count (i.e., responses) for sample A
 - ```sample_B_n```: sample size for sample B
@@ -41,7 +41,7 @@ test = bayesian_ab_test_prob(sample_A_n=100,
 - ```lpv_height```: height of the vertical LPV line in the ```dist_plot``` attribute (default = 15)
 - ```n_x_observed```: value > 1 to multiply ```sample_A_n```, ```sample_A_count```, ```sample_B_n```, and ```sample_B_count``` by when generating prior distributions (the larger the number, the greater the value possible in the range of the flat distribution; default = 2)
 
-### Attributes that can be returned:
+#### Attributes that can be returned:
 ```
 # Data frame of metrics
 test.df
@@ -53,7 +53,7 @@ test.lpv_plot
 
 <img src="https://latex.codecogs.com/gif.latex?LowerPlausibleValue&space;=&space;\frac{a}{a&plus;b}&space;-&space;1.65\sqrt{\frac{ab}{(a&plus;b)^{2}(a&plus;b&plus;1)}}" title="LowerPlausibleValue = \frac{a}{a+b} - 1.65\sqrt{\frac{ab}{(a+b)^{2}(a+b+1)}}" /></a>
 
-Where:
+#### Where:
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=a&space;=&space;1&space;&plus;&space;N_{yes}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?a&space;=&space;1&space;&plus;&space;N_{yes}" title="a = 1 + N_{yes}" /></a>
 
@@ -84,7 +84,7 @@ test.proportion_B_greater_than_A
 
 ## bayesian_ab_test_prob
 
-### Example:
+#### Example:
 ```
 # import dependencies
 from bayesian_ab_test import bayesian_ab_test_prob
@@ -100,7 +100,7 @@ test = bayesian_ab_test_prob(sample_a_total=4590,
                              N_additional_draws=1000,
                              lpv_height=15)
 ```
-### Argument definitions:
+#### Argument definitions:
 - ```sample_a_total```: total opportunity for sample A to respond (i.e., total emails sent to sample A)
 - ```sample_a_responses```: total responses for sample A (i.e., number of clicks in sample A)
 - ```sample_b_total```: total opportunity for sample B to respond (i.e., total emails sent to sample B)
@@ -108,7 +108,7 @@ test = bayesian_ab_test_prob(sample_a_total=4590,
 
 The rest are the same as from ```bayesian_ab_test_count```
 
-### Attributes that can be returned:
+#### Attributes that can be returned:
 ```
 # Distribution of sample A posterior
 test.p_A_samples
@@ -120,7 +120,7 @@ The rest are the same as from ```bayesian_ab_test_count```
 
 ## bayesian_t_test
 
-Example:
+#### Example:
 ```
 bayesian_ttest = bayesian_t_test(sample_A=test.p_A_samples, 
                                  sample_B=test.p_A_samples, 
@@ -128,19 +128,19 @@ bayesian_ttest = bayesian_t_test(sample_A=test.p_A_samples,
                                  N_simulations=1000,
                                  pct_tune=50)
 ```
-Argument definitions:
+#### Argument definitions:
 - ```sample_A```: array of values for sample A
 - ```sample_B```: array of values for sample B
 - ```v_minus_1```: degrees of freedom paramter
 - ```N_simulations```: number of tuned samples to draws (see [PyMC3 documentation](https://docs.pymc.io/api/inference.html); default = 1000)
 - ```pct_tune```: percentage of ```N_simulations``` to use for tuning (note: this number is added back to N_simulations; default = 50)
 
-Attributes that can be returned:
+#### Attributes that can be returned:
 - ```bayesian_t_test.summary```: summary from analysis
 
 ## parametric_t_test
 
-Example:
+#### Example:
 ```
 # import dependencies
 from bayesian_ab_test import parametric_t_test
@@ -150,12 +150,12 @@ t_test = parametric_t_test(sample_A=test.p_A_samples,
                            sample_b=test.p_B_samples,
                            name_of_metric='Click-through rate')
 ```
-Argument definitions:
+#### Argument definitions:
 - ```sample_A```: array of values for sample A
 - ```sample_B```: array of values for sample B
 - ```name_of_metric```: name of the metric for comparison (used for plotting)
 
-Attributes that can be returned:
+#### Attributes that can be returned:
 ```
 # t value from t-test
 t_test.t_test_t
@@ -168,7 +168,7 @@ t_test.cohens_d
 ```
 <img src="https://latex.codecogs.com/gif.latex?d&space;=&space;\frac{M_{1}-M_{2}}{SD_{pooled}}" title="d = \frac{M_{1}-M_{2}}{SD_{pooled}}" /></a>
 
-Where:
+#### Where:
 
 <img src="https://latex.codecogs.com/gif.latex?SD_{pooled}&space;=&space;\sqrt{\frac{SD_{1}^{2}&plus;SD_{2}^{2}}{2}}" title="SD_{pooled} = \sqrt{\frac{SD_{1}^{2}+SD_{2}^{2}}{2}}" /></a>
 
