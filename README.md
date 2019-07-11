@@ -27,7 +27,7 @@ test = bayesian_ab_test_count(sample_A_n=100,
                              pct_tune=50, 
                              gr_threshold=1.001, 
                              N_additional_draws=1000,
-                             lpv_height=15,
+                             lpv_height=6,
                              n_x_observed=2)
 ```
 #### Argument definitions:
