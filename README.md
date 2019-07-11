@@ -10,6 +10,78 @@ Dependencies include:
 - pandas
 - numpy
 
+## bayesian_ab_test_count
+
+Example:
+```
+# import dependencies
+from bayesian_ab_test import bayesian_ab_test_count
+
+# run test
+test = bayesian_ab_test_prob(sample_A_n=100, 
+                             sample_A_count=50, 
+                             sample_B_n=50, 
+                             sample_B_count=15,
+                             N_simulations=1000, 
+                             pct_tune=50, 
+                             gr_threshold=1.001, 
+                             N_additional_draws=1000,
+                             lpv_height=15,
+                             n_x_observed=2)
+```
+Argument definitions:
+- ```sample_A_n```: sample size for sample A
+- ```sample_A_count```: count (i.e., responses) for sample A
+- ```sample_B_n```: sample size for sample B
+- ```sample_B_count```: count (i.e., responses) for sample B
+- ```N_simulations```: number of tuned samples to draws (see [PyMC3 documentation](https://docs.pymc.io/api/inference.html); default = 1000)
+- ```pct_tune```: percentage of ```N_simulations``` to use for tuning (note: this number is added back to N_simulations; default = 50)
+- ```gr_threshold```: threshold to use for Gelman-Rubin statistic to determine if additional draws are necessary (default = 1.001)
+- ```N_additional_draws```: number of draws to add to ```N_simulations``` if Gelman-Rubin threshold is not met (default = 1000)
+- ```lpv_height```: height of the vertical LPV line in the ```dist_plot``` attribute (default = 15)
+- ```n_x_observed```: value > 1 to multiply ```sample_A_n```, ```sample_A_count```, ```sample_B_n```, and ```sample_B_count``` by when generating prior distributions (the larger the number, the greater the value possible in the range of the flat distribution; default = 2)
+
+Attributes that can be returned:
+```
+# Data frame of metrics
+test.df
+
+# Lower plausible value plot
+test.lpv_plot
+```
+<a href="https://www.codecogs.com/eqnedit.php?latex=UpperPlausibleValue&space;=&space;\frac{a}{a&plus;b}&plus;1.65\sqrt{\frac{ab}{(a&plus;b)^{2}(a&plus;b&plus;1)}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?UpperPlausibleValue&space;=&space;\frac{a}{a&plus;b}&plus;1.65\sqrt{\frac{ab}{(a&plus;b)^{2}(a&plus;b&plus;1)}}" title="UpperPlausibleValue = \frac{a}{a+b}+1.65\sqrt{\frac{ab}{(a+b)^{2}(a+b+1)}}" /></a>
+
+<img src="https://latex.codecogs.com/gif.latex?LowerPlausibleValue&space;=&space;\frac{a}{a&plus;b}&space;-&space;1.65\sqrt{\frac{ab}{(a&plus;b)^{2}(a&plus;b&plus;1)}}" title="LowerPlausibleValue = \frac{a}{a+b} - 1.65\sqrt{\frac{ab}{(a+b)^{2}(a+b+1)}}" /></a>
+
+Where:
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=a&space;=&space;1&space;&plus;&space;N_{clicks}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?a&space;=&space;1&space;&plus;&space;N_{clicks}" title="a = 1 + N_{clicks}" /></a>
+
+<img src="https://latex.codecogs.com/gif.latex?b&space;=&space;1&space;&plus;&space;N_{nonclicks}" title="b = 1 + N_{nonclicks}" /></a>
+
+```
+# Distribution of sample A posterior
+test.sample_A_count_div_n_list
+
+# Distribution of sample B posterior
+test.sample_B_count_div_n_list
+
+# Bayesian fraction missing information
+test.bfmi
+
+# Maximum gelman-rubin statistic
+test.max_gr
+
+# Plot of distributions
+test.dist_plot
+
+# Proportion of sample A greater than B
+test.proportion_A_greater_than_B
+
+# Proportion of sample B greater than A
+test.proportion_B_greater_than_A
+```
+
 ## bayesian_ab_test_prob
 
 Example:
@@ -34,8 +106,10 @@ Argument definitions:
 - ```sample_b_responses```: total responses for sample B (i.e., number of clicks in sample B)
 - ```N_simulations```: number of tuned samples to draws (see [PyMC3 documentation](https://docs.pymc.io/api/inference.html); default = 1000)
 - ```pct_tune```: percentage of ```N_simulations``` to use for tuning (note: this number is added back to N_simulations; default = 50)
-- ```gr_threshold```: threshold to use for Gelman-Rubin statistic to determine if additional draws are necessary (default = 1)
-- ```N_additional_draws```: number of draws to add to ```N_simulations``` is Gelman-Rubin threshold is not met (default = 1000)
+- ```gr_threshold```: threshold to use for Gelman-Rubin statistic to determine if additional draws are necessary (default = 1.001)
+- ```N_additional_draws```: number of draws to add to ```N_simulations``` if Gelman-Rubin threshold is not met (default = 1000)
+- ```lpv_height```: height of the vertical LPV line in the ```dist_plot``` attribute (default = 15)
+- ```n_x_observed```: value > 1 to multiply ```sample_A_n```, ```sample_A_count```, ```sample_B_n```, and ```sample_B_count``` by when generating prior distributions (the larger the number, the greater the value possible in the range of the flat distribution; default = 2)
 
 Attributes that can be returned:
 ```
