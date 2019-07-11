@@ -19,7 +19,7 @@ This model compares 2 groups by taking arguments for total sample and total occu
 from bayesian_ab_test import bayesian_ab_test_count
 
 # run test
-test = bayesian_ab_test_prob(sample_A_n=100, 
+test = bayesian_ab_test_count(sample_A_n=100, 
                              sample_A_count=50, 
                              sample_B_n=50, 
                              sample_B_count=15,
