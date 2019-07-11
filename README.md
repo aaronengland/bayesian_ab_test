@@ -1,6 +1,6 @@
 # bayesian_ab_test
 
-A Python package built on [PyMC3](https://docs.pymc.io/) for AB testing using Bayesian methods. Priors are assumed to be uniform and posteriors are assumed to be Bernoulli.
+A Python package built on [PyMC3](https://docs.pymc.io/) for AB testing using Bayesian methods. 
 
 Dependencies include:
 - pymc3
@@ -11,6 +11,7 @@ Dependencies include:
 - numpy
 
 ## bayesian_ab_test_count
+This model compares 2 groups by taking arguments for total sample and total occurences of each group and fits a Flat prior distribution with a range from 0 until a user-defined value (see ```n_x_observed``` argument). Then, it fits the Flat distributions to Poisson distributions with the observed values. Sample size is being controlled for by dividing each samples total occurrences by the samples total observations.
 
 #### Example:
 ```
@@ -39,7 +40,7 @@ test = bayesian_ab_test_prob(sample_A_n=100,
 - ```gr_threshold```: threshold to use for Gelman-Rubin statistic to determine if additional draws are necessary (default = 1.001)
 - ```N_additional_draws```: number of draws to add to ```N_simulations``` if Gelman-Rubin threshold is not met (default = 1000)
 - ```lpv_height```: height of the vertical LPV line in the ```dist_plot``` attribute (default = 15)
-- ```n_x_observed```: value > 1 to multiply ```sample_A_n```, ```sample_A_count```, ```sample_B_n```, and ```sample_B_count``` by when generating prior distributions (the larger the number, the greater the value possible in the range of the flat distribution; default = 2)
+- ```n_x_observed```: value >= 1 to multiply ```sample_A_n```, ```sample_A_count```, ```sample_B_n```, and ```sample_B_count``` by when generating prior distributions (the larger the number, the greater the value possible in the range of the flat distribution; default = 2)
 
 #### Attributes that can be returned:
 ```
@@ -83,6 +84,7 @@ test.proportion_B_greater_than_A
 ```
 
 ## bayesian_ab_test_prob
+Priors are assumed to be uniform and posteriors are assumed to be Bernoulli.
 
 #### Example:
 ```
