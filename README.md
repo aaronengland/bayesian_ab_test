@@ -84,7 +84,7 @@ test.proportion_B_greater_than_A
 ```
 
 ## bayesian_ab_test_prob
-Priors are assumed to be uniform and posteriors are assumed to be Bernoulli.
+This model compares 2 groups by taking arguments for total sample and total occurences of each group and fits a Flat prior distribution with a range from 0 to 1. Then, it fits the Flat distributions to Bernoulli distributions with the observed probabilities. 
 
 #### Example:
 ```
