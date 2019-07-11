@@ -55,7 +55,7 @@ test.lpv_plot
 
 Where:
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=a&space;=&space;1&space;&plus;&space;N_{clicks}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?a&space;=&space;1&space;&plus;&space;N_{clicks}" title="a = 1 + N_{clicks}" /></a>
+<a href="https://www.codecogs.com/eqnedit.php?latex=a&space;=&space;1&space;&plus;&space;N_{yes}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?a&space;=&space;1&space;&plus;&space;N_{yes}" title="a = 1 + N_{yes}" /></a>
 
 <img src="https://latex.codecogs.com/gif.latex?b&space;=&space;1&space;&plus;&space;N_{nonclicks}" title="b = 1 + N_{nonclicks}" /></a>
 
